@@ -18,14 +18,13 @@ main {
 .calculator__container {
   height: 560px;
   width: 320px;
-  height: 560px;
-  width: 320px;
   border: 1px solid red;
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
 }
 .calculator__screen {
   background-color: #64b5f6;
-}
-.calculator__screen {
   height: 30%;
   width: 100%;
 }
