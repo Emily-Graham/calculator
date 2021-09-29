@@ -7,6 +7,14 @@ body {
   background-color: #90caf8;
 }
 
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .calculator__container {
   height: 560px;
   width: 320px;
