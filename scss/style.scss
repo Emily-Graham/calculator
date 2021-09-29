@@ -24,20 +24,24 @@ main {
 
 .calculator {
   &__container {
-    //7:4 ratio
-    @include m.height-width(560px, 320px);
-    border: 1px solid red;
-    background-color: white;
-    border-radius: 15px;
+    display: grid;
+    grid-template-rows: repeat(8, 1fr);
+
     overflow: hidden;
+    @include m.height-width(560px, 320px); //7:4 ratio
+    background-color: p.$white;
+    border-radius: 15px;
+    box-shadow: 3px 5px 10px p.$dropShadow;
   }
 
   &__screen {
   background-color: p.$screenColour;
-    //tempsizing
-    @include m.height-width(30%, 100%);
+    grid-row: 1 / 4;
+    @include m.height-width(100%, 100%);
   }
 
-  
+  &__button-container {
+    //temp sizing
+    @include m.height-width(70%, 100%);
+  }
 }
-

@@ -16,15 +16,22 @@ main {
 }
 
 .calculator__container {
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  overflow: hidden;
   height: 560px;
   width: 320px;
-  border: 1px solid red;
-  background-color: white;
+  background-color: #FFF;
   border-radius: 15px;
-  overflow: hidden;
+  box-shadow: 3px 5px 10px #5796dd;
 }
 .calculator__screen {
   background-color: #64b5f6;
-  height: 30%;
+  grid-row: 1/4;
+  height: 100%;
+  width: 100%;
+}
+.calculator__button-container {
+  height: 70%;
   width: 100%;
 }
