@@ -32,6 +32,21 @@ main {
   width: 100%;
 }
 .calculator__button-container {
-  height: 70%;
+  grid-row: 4/9;
+  height: 100%;
   width: 100%;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+}
+.calculator__button {
+  display: flex;
+  justify-content: center;
+  color: #c7c8ca;
+  align-items: center;
+  font-family: "Baloo 2", cursive;
+  font-size: 1.8rem;
+}
+.calculator__button:hover {
+  color: grey;
 }

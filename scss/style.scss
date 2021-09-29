@@ -41,7 +41,23 @@ main {
   }
 
   &__button-container {
-    //temp sizing
-    @include m.height-width(70%, 100%);
+    grid-row: 4 / 9;
+    @include m.height-width(100%, 100%);
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    color: p.$buttonText;
+    align-items: center;
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.8rem;
+
+    &:hover {
+      color: grey;
+    }
   }
 }
