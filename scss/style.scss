@@ -1,4 +1,5 @@
 @use "./partials/palette" as p;
+@use "./partials/mixins" as m;
 
 //reset
 * {
@@ -19,17 +20,24 @@ main {
   align-items: center;
 }
 
-.calculator {
+//calculator keypad ans screen seem to be on a grid with 8 parts, in this case 70px
 
+.calculator {
   &__container {
     //7:4 ratio
     height: 560px;
     width: 320px;
+    @include m.height-width(560px, 320px);
     border: 1px solid red;
   }
 
   &__screen {
   background-color: p.$screenColour;
+  }
+
+  &__screen {
+    //tempsizing
+    @include m.height-width(30%, 100%);
   }
 }
 
