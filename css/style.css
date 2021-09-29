@@ -6,3 +6,12 @@
 body {
   background-color: #90caf8;
 }
+
+.calculator__container {
+  height: 560px;
+  width: 320px;
+  border: 1px solid red;
+}
+.calculator__screen {
+  background-color: #64b5f6;
+}

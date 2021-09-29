@@ -10,6 +10,17 @@ body {
   background-color: p.$background;
 }
 
-.calculator__screen {
-  
+.calculator {
+
+  &__container {
+    //7:4 ratio
+    height: 560px;
+    width: 320px;
+    border: 1px solid red;
+  }
+
+  &__screen {
+  background-color: p.$screenColour;
+  }
 }
+
