@@ -35,9 +35,11 @@ main {
   grid-row: 4/9;
   height: 100%;
   width: 100%;
+  border: 1px solid red;
   display: grid;
   grid-template-rows: repeat(5, 1fr);
   grid-template-columns: repeat(4, 1fr);
+  grid: "clear back divide multiply" "seven eight nine minus" "four five six plus" "one two three equals" "zero zero decimal equals";
 }
 .calculator__button {
   display: flex;
@@ -49,4 +51,58 @@ main {
 }
 .calculator__button:hover {
   color: grey;
+}
+.calculator__button--0 {
+  grid-area: zero;
+}
+.calculator__button--1 {
+  grid-area: one;
+}
+.calculator__button--2 {
+  grid-area: two;
+}
+.calculator__button--3 {
+  grid-area: three;
+}
+.calculator__button--4 {
+  grid-area: four;
+}
+.calculator__button--5 {
+  grid-area: five;
+}
+.calculator__button--6 {
+  grid-area: six;
+}
+.calculator__button--7 {
+  grid-area: seven;
+}
+.calculator__button--8 {
+  grid-area: eight;
+}
+.calculator__button--9 {
+  grid-area: nine;
+}
+.calculator__button--plus {
+  grid-area: plus;
+}
+.calculator__button--minus {
+  grid-area: minus;
+}
+.calculator__button--multiply {
+  grid-area: multiply;
+}
+.calculator__button--divide {
+  grid-area: divide;
+}
+.calculator__button--equals {
+  grid-area: equals;
+}
+.calculator__button--decimal {
+  grid-area: decimal;
+}
+.calculator__button--clear {
+  grid-area: clear;
+}
+.calculator__button--back {
+  grid-area: back;
 }

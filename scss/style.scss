@@ -1,5 +1,6 @@
 @use "./partials/palette" as p;
 @use "./partials/mixins" as m;
+@use "./partials/variables" as v;
 
 //reset
 * {
@@ -43,9 +44,16 @@ main {
   &__button-container {
     grid-row: 4 / 9;
     @include m.height-width(100%, 100%);
+    border: 1px solid red;
     display: grid;
     grid-template-rows: repeat(5, 1fr);
     grid-template-columns: repeat(4, 1fr);
+    grid: 
+    'clear back divide multiply'
+    'seven eight nine minus'
+    'four five six plus'
+    'one two three equals'
+    'zero zero decimal equals';
   }
 
   &__button {
@@ -58,6 +66,61 @@ main {
 
     &:hover {
       color: grey;
+    }
+
+    &--0 {
+      grid-area: zero;
+    }
+    &--1 {
+      grid-area: one;
+    }
+    &--2 {
+      grid-area: two;
+    }
+    &--3 {
+      grid-area: three;
+    }
+    &--4 {
+      grid-area: four;
+    }
+    &--5 {
+      grid-area: five;
+    }
+    &--6 {
+      grid-area: six;
+    }
+    &--7 {
+      grid-area: seven;
+    }
+    &--8 {
+      grid-area: eight;
+    }
+    &--9 {
+      grid-area: nine;
+    }
+    &--plus {
+      grid-area: plus;
+    }
+    &--minus {
+      grid-area: minus;
+    }
+    &--multiply {
+      grid-area: multiply;
+    }
+    &--divide {
+      grid-area: divide;
+    }
+    &--equals {
+      grid-area: equals;
+    }
+    &--decimal {
+      grid-area: decimal;
+    }
+    &--clear {
+      grid-area: clear;
+    }
+    &--back {
+      grid-area: back;
     }
   }
 }
