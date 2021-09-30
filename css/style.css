@@ -50,8 +50,9 @@ main {
   font-family: "Inter", sans-serif;
   font-size: 1.5rem;
 }
-.calculator__button:hover {
-  color: #808080;
+.calculator__button:active {
+  color: #FFF;
+  background-color: #e6e7e9;
 }
 .calculator__button--0 {
   grid-area: zero;
@@ -100,6 +101,9 @@ main {
   color: #FFF;
   background-color: #fa742d;
 }
+.calculator__button--equals:active {
+  background-color: #ffae17;
+}
 .calculator__button--decimal {
   grid-area: decimal;
 }
@@ -143,6 +147,9 @@ main {
   content: "";
   display: inline-block;
   width: 100%;
+}
+.screen__currentCalculation--singleText {
+  text-align: right;
 }
 
 #svg {
