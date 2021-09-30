@@ -13,26 +13,20 @@ body {
 }
 
 main {
-  width: 100vw;
-  height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  @include m.height-width(100vh, 100vw);
 }
-
-//calculator keypad ans screen seem to be on a grid with 8 parts, in this case 70px
 
 .calculator {
   &__container {
     display: grid;
     grid-template-rows: repeat(8, 1fr);
-
     overflow: hidden;
     @include m.height-width(560px, 320px); //7:4 ratio
-    background-color: p.$white;
     border-radius: 15px;
-    box-shadow: 3px 5px 10px p.$dropShadow;
+    box-shadow: 3px 7px 10px p.$dropShadow;
   }
 
   &__screen {
@@ -44,28 +38,30 @@ main {
   &__button-container {
     grid-row: 4 / 9;
     @include m.height-width(100%, 100%);
-    border: 1px solid red;
     display: grid;
     grid-template-rows: repeat(5, 1fr);
     grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
     grid: 
     'clear back divide multiply'
     'seven eight nine minus'
     'four five six plus'
     'one two three equals'
     'zero zero decimal equals';
+    background-color: p.$keypad;
   }
 
   &__button {
     display: flex;
     justify-content: center;
     color: p.$buttonText;
+    background-color: p.$white;
     align-items: center;
-    font-family: 'Baloo 2', cursive;
-    font-size: 1.8rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
 
     &:hover {
-      color: grey;
+      color: #808080;
     }
 
     &--0 {
@@ -112,6 +108,8 @@ main {
     }
     &--equals {
       grid-area: equals;
+      color: p.$white;
+      background-color: p.$equalsOrange;
     }
     &--decimal {
       grid-area: decimal;
@@ -121,6 +119,50 @@ main {
     }
     &--back {
       grid-area: back;
+      position: relative;
     }
   }
+}
+
+.screen {
+  &__statusBar {
+    display: flex;
+    justify-content: space-between;
+    height: 10%;
+    background-color: beige;
+  }
+
+  &__calculations {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @include m.height-width(100%, 100%);
+  }
+
+  &__previousCalculation {
+    box-sizing: border-box;
+    color: p.$white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    text-align: right;
+    vertical-align: middle;
+    padding: 0px 10px 0px 10px;
+  }
+
+  &__currentCalculation {
+    @extend .screen__previousCalculation;
+    @include m.height-width(70px, 100%);
+    font-size: 3.5rem;
+    text-align: justify;
+    
+    &:after {
+      content: "";
+      display: inline-block;
+      width: 100%;
+    }
+  }
+}
+
+#svg {
+  position: absolute;
 }
