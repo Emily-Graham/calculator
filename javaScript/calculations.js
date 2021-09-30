@@ -1,20 +1,20 @@
 
 //additon 
-const addition = (a, b) => {
+export const addition = (a, b) => {
   return a + b;
 }
 
 //subtraction
-const subtraction = (a, b) => {
+export const subtraction = (a, b) => {
   return a - b;
 }
 
 //multiplication
-const multiplication = (a, b) => {
+export const multiplication = (a, b) => {
   return a * b;
 }
 
 //divide
-const divide = (a, b) => {
+export const divide = (a, b) => {
   return a / b;
 }

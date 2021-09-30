@@ -155,7 +155,7 @@ main {
 
   &__currentCalculation {
     @extend .screen__previousCalculation;
-    @include m.height-width(70px, 100%);
+    @include m.height-width(80px, 100%);
     font-size: 3.5rem;
     text-align: justify;
     
