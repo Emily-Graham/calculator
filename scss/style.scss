@@ -1,5 +1,176 @@
+@use "./partials/palette" as p;
+@use "./partials/mixins" as m;
+@use "./partials/variables" as v;
+
 //reset
 * {
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-color: p.$background;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include m.height-width(100vh, 100vw);
+}
+
+.calculator {
+  &__container {
+    display: grid;
+    grid-template-rows: repeat(8, 1fr);
+    overflow: hidden;
+    @include m.height-width(560px, 320px); //7:4 ratio
+    border-radius: 15px;
+    box-shadow: 3px 7px 10px p.$dropShadow;
+  }
+
+  &__screen {
+  background-color: p.$screenColour;
+    grid-row: 1 / 4;
+    @include m.height-width(100%, 100%);
+  }
+
+  &__button-container {
+    grid-row: 4 / 9;
+    @include m.height-width(100%, 100%);
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    grid: 
+    'clear back divide multiply'
+    'seven eight nine minus'
+    'four five six plus'
+    'one two three equals'
+    'zero zero decimal equals';
+    background-color: p.$keypad;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    color: p.$buttonText;
+    background-color: p.$white;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+
+    &:active {
+      color: p.$white;
+      background-color: p.$keypad;
+    }
+
+    &--0 {
+      grid-area: zero;
+    }
+    &--1 {
+      grid-area: one;
+    }
+    &--2 {
+      grid-area: two;
+    }
+    &--3 {
+      grid-area: three;
+    }
+    &--4 {
+      grid-area: four;
+    }
+    &--5 {
+      grid-area: five;
+    }
+    &--6 {
+      grid-area: six;
+    }
+    &--7 {
+      grid-area: seven;
+    }
+    &--8 {
+      grid-area: eight;
+    }
+    &--9 {
+      grid-area: nine;
+    }
+    &--plus {
+      grid-area: plus;
+    }
+    &--minus {
+      grid-area: minus;
+    }
+    &--multiply {
+      grid-area: multiply;
+    }
+    &--divide {
+      grid-area: divide;
+    }
+    &--equals {
+      grid-area: equals;
+      color: p.$white;
+      background-color: p.$equalsOrange;
+      &:active {
+        background-color: p.$equalsPressed;
+      }
+    }
+    &--decimal {
+      grid-area: decimal;
+    }
+    &--clear {
+      grid-area: clear;
+    }
+    &--back {
+      grid-area: back;
+      position: relative;
+    }
+  }
+}
+
+.screen {
+  &__statusBar {
+    display: flex;
+    justify-content: space-between;
+    height: 10%;
+    background-color: beige;
+  }
+
+  &__calculations {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @include m.height-width(100%, 100%);
+  }
+
+  &__previousCalculation {
+    box-sizing: border-box;
+    color: p.$white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    text-align: right;
+    vertical-align: middle;
+    padding: 0px 10px 0px 10px;
+  }
+
+  &__currentCalculation {
+    @extend .screen__previousCalculation;
+    @include m.height-width(70px, 100%);
+    font-size: 3.5rem;
+    text-align: justify;
+    
+    &:after {
+      content: "";
+      display: inline-block;
+      width: 100%;
+    }
+
+    &--singleText {
+      text-align: right;
+    }
+  }
+}
+
+#svg {
+  position: absolute;
 }
