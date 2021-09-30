@@ -112,7 +112,7 @@ main {
       color: p.$white;
       background-color: p.$equalsOrange;
       &:active {
-        background-color: rgb(255, 174, 23);
+        background-color: p.$equalsPressed;
       }
     }
     &--decimal {
