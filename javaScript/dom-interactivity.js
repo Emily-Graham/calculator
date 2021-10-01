@@ -20,7 +20,6 @@ const clear = () => {
   displayElement.innerHTML = "0";
   displayElement2.innerHTML = "";
 }
-  //currentCalculation equates to 0
 
 
 
