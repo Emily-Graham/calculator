@@ -22,7 +22,7 @@ const clear = () => {
 
 //BACKWARDS PRESSED
 const deleteBackwards = () => {
-  console.log("Delete backwards whas been clicked!");
+  console.log("Delete backwards has been clicked!");
 }
 //Back removes the last numeral/operator in previousCal
   //if an operator, also remove space in display text
@@ -97,6 +97,7 @@ const resolveExpression = () => {
 //BUTTON PRESSED
 //when numeral buttons pressed, value is appended to currentCalculation
 const buttonPressed = (input) => {
+  console.log(input);
   //call corrosponding function
   switch (input) {
     case "/": 
@@ -131,4 +132,8 @@ const buttonPressed = (input) => {
 deleteButton.addEventListener("mousedown", active);
 deleteButton.addEventListener("mouseup", notActive);
   //calls buttonPressed function
-document.querySelectorAll(".calculator__button").forEach((button) => button.addEventListener("click", (event) => buttonPressed(event.target.id)));
+document.querySelectorAll(".calculator__button").forEach((button) => button.addEventListener("click", (event) => 
+{ if (event.target === svg || event.target.id === "svg") {
+  buttonPressed("D")
+} else {
+  buttonPressed(event.target.id)}}));
