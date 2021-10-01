@@ -51,7 +51,6 @@ main {
   font-size: 1.5rem;
 }
 .calculator__button:active {
-  color: #FFF;
   background-color: #e6e7e9;
 }
 .calculator__button--0 {
