@@ -57,17 +57,30 @@ const operator = (value) => {
   //operator appends to previousCalculation, with space between
     //if there is no previous value, operator is appended to the default 0
     //if an operation is currently at end of previousCalculation, replace it with new operator
-
+  //replace currentCalculation with 0, in case of appending decimals 
 
 
 //DECIMAL PRESSED
 const appendDecimal = () => {
-  console.log("A decimal should get added!");
+  const displayElement = document.querySelector(".screen__currentCalculation");
+  const currentDisplay = displayElement.innerHTML;
+
+  //previous character is decimal, don't add
+  if (currentDisplay[currentDisplay.length-1] === ".") {
+    console.log("decimal already exists"); //delete later
+    return;
+    //don't add past 7 characters
+  } else if (currentDisplay.length === 7) {
+    console.log("max character reached"); //delete later
+    return;
+    //append decimal
+  } else {
+    displayElement.innerHTML += ".";
+    console.log(`appended .`); //delete later
+  }
 }
-  //if last value is a decimal, do not add
-  //if last value is an operator, first add 0
-  //if no previous value, first add 0
-  //else, append decimal
+  
+
 
 
 
@@ -125,10 +138,10 @@ const buttonPressed = (input) => {
       operator(input);
       break;
     case "C":
-      clear();
+      clear(); //done
       break;
     case "D":
-      deleteBackwards();
+      deleteBackwards(); //done
       break;
     case ".":
       appendDecimal();
@@ -137,7 +150,7 @@ const buttonPressed = (input) => {
       resolveExpression();
       break;
     default:
-      appendNumeral(input);
+      appendNumeral(input); //done
       break;
   }
 }
