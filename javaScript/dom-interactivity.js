@@ -56,14 +56,31 @@ const appendDecimal = () => {
 
 //NUMERICAL BUTTON PRESSED
 const appendNumeral = (value) => {
-  const currentDisplay = document.querySelector(".screen__currentCalculation");
-  let equation1 = null;
-  console.log(`the number ${value} got pressed!`);
+  const displayElement = document.querySelector(".screen__currentCalculation");
+  const currentDisplay = displayElement.innerHTML;
+  let equation1 = parseFloat(currentDisplay);
 
-
+  //check if max characters
+  if (currentDisplay.length === 7) {
+    console.log("no number added"); //delete later
+    return;
+    //don't add 0 to 0
+  } else if (currentDisplay.length === 1 
+            && currentDisplay === "0" 
+            && value === "0") {
+    console.log("Already 0"); //delete later
+    //replace if only 0
+  } else if (currentDisplay.length === 1 
+            && currentDisplay === "0") {
+    console.log(`0 => ${value}`); //delete later
+    displayElement.innerHTML = value;
+    //append new number
+  } else {
+    displayElement.innerHTML += value;
+    console.log(`appended ${value}`); //delete later
+  }
+  //resizing text display based on number length - NOT CURRENTLY IMPLEMENTED
 }
-//0 button pressed
-    //if there is only one value, do not add if also 0
 
 
 
