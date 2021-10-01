@@ -43,7 +43,7 @@ main {
     grid-template-columns: repeat(4, 1fr);
     gap: 2px;
     grid: 
-    'clear back divide multiply'
+    'clear delete divide multiply'
     'seven eight nine minus'
     'four five six plus'
     'one two three equals'
@@ -120,8 +120,8 @@ main {
     &--clear {
       grid-area: clear;
     }
-    &--back {
-      grid-area: back;
+    &--delete {
+      grid-area: delete;
       position: relative;
     }
   }

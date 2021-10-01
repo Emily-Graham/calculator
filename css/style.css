@@ -38,7 +38,7 @@ main {
   grid-template-rows: repeat(5, 1fr);
   grid-template-columns: repeat(4, 1fr);
   gap: 2px;
-  grid: "clear back divide multiply" "seven eight nine minus" "four five six plus" "one two three equals" "zero zero decimal equals";
+  grid: "clear delete divide multiply" "seven eight nine minus" "four five six plus" "one two three equals" "zero zero decimal equals";
   background-color: #e6e7e9;
 }
 .calculator__button {
@@ -109,8 +109,8 @@ main {
 .calculator__button--clear {
   grid-area: clear;
 }
-.calculator__button--back {
-  grid-area: back;
+.calculator__button--delete {
+  grid-area: delete;
   position: relative;
 }
 
