@@ -25,11 +25,25 @@ const clear = () => {
 
 //BACKWARDS PRESSED
 const deleteBackwards = () => {
-  console.log("Delete backwards has been clicked!");
+  const displayElement = document.querySelector(".screen__currentCalculation");
+  const currentDisplay = displayElement.innerHTML;
+  console.log("Delete backwards has been clicked!"); //delete later
+  console.log(displayElement.innerHTML.slice(0, -1));
+
+  //if already at 0
+  if (currentDisplay.length === 1 
+    && currentDisplay === "0") {
+    console.log("cannot delete anything else"); //delete later
+    return;
+  //if deleting final numeral
+  } else if (currentDisplay.length === 1){
+    displayElement.innerHTML = "0"; 
+    console.log(`deleted ${displayElement.innerHTML[displayElement.innerHTML.length-1]}`); //delete later
+  } else {
+    console.log(`deleting ${displayElement.innerHTML[displayElement.innerHTML.length-1]}`); //delete later
+    displayElement.innerHTML = displayElement.innerHTML.slice(0, -1);
+  }
 }
-//Back removes the last numeral/operator in previousCal
-  //if an operator, also remove space in display text
-  //if there is only one numeral in currentCalculation, replace with default zero
 
 
 
@@ -94,6 +108,7 @@ const resolveExpression = () => {
 //equals resolves equation and displays result in currentCalculation
   //if previousCalculation does not end in an operator, accumalate last operator with each additional click
   //if previousCalculation ends in an decimal point, delete decimal
+  //if dividing by zero, message "cannot divide by zero"
 
 
 
