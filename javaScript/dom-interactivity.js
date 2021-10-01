@@ -12,7 +12,6 @@ const notActive = () => {
 
 
 
-
 //CLEAR PRESSED
 const clear = () => {
   console.log("Clear has been clicked!");
@@ -35,8 +34,8 @@ const deleteBackwards = () => {
 const operator = (value) => {
   console.log(`I'm working because ${value} has been pressed!`);
 }
-  //any currentCalculation value is sent to previousCalculation
-    //if there is a previous value and an operator, it is calculated
+  //any currentCalculation numeral is sent to previousCalculation
+    //if there is a previous numeral and an operator, it is calculated
       //resulting value sent to currentCalculation
   //operator appends to previousCalculation, with space between
     //if there is no previous value, operator is appended to the default 0
@@ -57,7 +56,11 @@ const appendDecimal = () => {
 
 //NUMERICAL BUTTON PRESSED
 const appendNumeral = (value) => {
+  const currentDisplay = document.querySelector(".screen__currentCalculation");
+  let equation1 = null;
   console.log(`the number ${value} got pressed!`);
+
+
 }
 //0 button pressed
     //if there is only one value, do not add if also 0
@@ -77,8 +80,6 @@ const resolveExpression = () => {
 //BUTTON PRESSED
 //when numeral buttons pressed, value is appended to currentCalculation
 const buttonPressed = (input) => {
-  //connect button pressed to corrosponding value
-  console.log(input);
   //call corrosponding function
   switch (input) {
     case "/": 

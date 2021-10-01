@@ -122,32 +122,33 @@ main {
 }
 .screen__calculations {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
+  flex-wrap: wrap;
+  align-content: center;
+  box-sizing: border-box;
+  padding: 0px 10px 0px 10px;
+  height: 90%;
   width: 100%;
 }
-.screen__previousCalculation, .screen__currentCalculation {
+.screen__previousCalculation, .screen__equals, .screen__currentCalculation {
   box-sizing: border-box;
+  height: auto;
+  width: 100%;
   color: #FFF;
   font-family: "Inter", sans-serif;
   font-weight: 200;
   text-align: right;
   vertical-align: middle;
-  padding: 0px 10px 0px 10px;
+}
+.screen__equals, .screen__currentCalculation {
+  height: auto;
+  width: 12%;
+  font-size: 3.5rem;
+  text-align: left;
 }
 .screen__currentCalculation {
-  height: 80px;
-  width: 100%;
+  height: auto;
+  width: 88%;
   font-size: 3.5rem;
-  text-align: justify;
-}
-.screen__currentCalculation:after {
-  content: "";
-  display: inline-block;
-  width: 100%;
-}
-.screen__currentCalculation--singleText {
   text-align: right;
 }
 
