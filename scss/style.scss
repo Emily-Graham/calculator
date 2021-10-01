@@ -146,7 +146,7 @@ main {
 
   &__previousCalculation {
     box-sizing: border-box;
-    @include m.height-width(auto, 100%);
+    @include m.height-width(20px, 100%);
     color: p.$white;
     font-family: 'Inter', sans-serif;
     font-weight: 200;

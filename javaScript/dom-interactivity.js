@@ -14,7 +14,11 @@ const notActive = () => {
 
 //CLEAR PRESSED
 const clear = () => {
-  console.log("Clear has been clicked!");
+  console.log("Clear has been clicked!"); //delete later
+  const displayElement = document.querySelector(".screen__currentCalculation");
+  const displayElement2 = document.querySelector(".screen__previousCalculation");
+  displayElement.innerHTML = "0";
+  displayElement2.innerHTML = "";
 }
   //currentCalculation equates to 0
 
@@ -129,6 +133,7 @@ const buttonPressed = (input) => {
 
 
 //EVENT LISTENERS
+  //css styling event listeners
 deleteButton.addEventListener("mousedown", active);
 deleteButton.addEventListener("mouseup", notActive);
   //calls buttonPressed function

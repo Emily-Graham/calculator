@@ -131,7 +131,7 @@ main {
 }
 .screen__previousCalculation, .screen__equals, .screen__currentCalculation {
   box-sizing: border-box;
-  height: auto;
+  height: 20px;
   width: 100%;
   color: #FFF;
   font-family: "Inter", sans-serif;
