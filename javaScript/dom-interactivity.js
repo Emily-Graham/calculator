@@ -82,14 +82,8 @@ const buttonPressed = (input) => {
   //call corrosponding function
   switch (input) {
     case "/": 
-      operator(input);
-      break;
     case "*":
-      operator(input);
-      break;
     case "-": 
-      operator(input);
-      break;
     case "+":
       operator(input);
       break;
