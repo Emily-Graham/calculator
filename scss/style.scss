@@ -139,6 +139,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
+    justify-content: flex-end;
     box-sizing: border-box;
     padding: 0px 10px 0px 10px;
     @include m.height-width(90%, 100%);
@@ -154,18 +155,21 @@ main {
     vertical-align: middle;
   }
 
+  &__currentCalculation {
+    @extend .screen__previousCalculation;
+    @include m.height-width(auto, 88%);
+    font-size: 3.5rem;
+  }
+
   &__equals {
+    display: none;
     @extend .screen__previousCalculation;
     @include m.height-width(auto, 12%);
     font-size: 3.5rem;
     text-align: left;
-  }
-
-  &__currentCalculation {
-    @extend .screen__equals;
-    @include m.height-width(auto, 88%);
-    font-size: 3.5rem;
-    text-align: right;
+    &--visible {
+      display: inline;
+    }
   }
 }
 

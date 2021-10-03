@@ -124,6 +124,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
+  justify-content: flex-end;
   box-sizing: border-box;
   padding: 0px 10px 0px 10px;
   height: 90%;
@@ -139,17 +140,20 @@ main {
   text-align: right;
   vertical-align: middle;
 }
-.screen__equals, .screen__currentCalculation {
+.screen__currentCalculation {
+  height: auto;
+  width: 88%;
+  font-size: 3.5rem;
+}
+.screen__equals {
+  display: none;
   height: auto;
   width: 12%;
   font-size: 3.5rem;
   text-align: left;
 }
-.screen__currentCalculation {
-  height: auto;
-  width: 88%;
-  font-size: 3.5rem;
-  text-align: right;
+.screen__equals--visible {
+  display: inline;
 }
 
 #svg {

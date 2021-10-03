@@ -15,10 +15,12 @@ const notActive = () => {
 //CLEAR PRESSED
 const clear = () => {
   console.log("Clear has been clicked!"); //delete later
+  const cssEquals = document.querySelector(".screen__equals");
   const displayElement = document.querySelector(".screen__currentCalculation");
   const displayElement2 = document.querySelector(".screen__previousCalculation");
   displayElement.innerHTML = "0";
-  displayElement2.innerHTML = "";
+  displayElement2.innerHTML = ""; 
+  cssEquals.classList.remove("screen__equals--visible");
 }
 
 
@@ -47,17 +49,58 @@ const deleteBackwards = () => {
 
 
 
-  //OPERATOR PRESSED
-const operator = (value) => {
-  console.log(`I'm working because ${value} has been pressed!`);
+//OPERATOR PRESSED
+const appendOperator = (value) => {
+  const displayElement = document.querySelector(".screen__currentCalculation");
+  const displayElement2 = document.querySelector(".screen__previousCalculation");
+  const currentDisplay = displayElement.innerHTML;
+  const previousDisplay = displayElement2.innerHTML;
+  let stringValue = "";
+  console.log(`previous string last char: ${previousDisplay[previousDisplay.length-1]}`);
+
+  //convert operator to string equivalent 
+  switch (value){
+    case "-":
+    case "+": 
+      stringValue = value; 
+      break;
+    case "/": 
+      stringValue = "÷";
+      break;
+    default:
+      stringValue = "×";
+  }
+
+  //if previousDisplay is empty
+  if (previousDisplay === "") {
+    console.log(`changed display, added ${value}`);
+    displayElement2.innerHTML = `${displayElement.innerHTML} ${stringValue}`;
+    displayElement.innerHTML = "0";
+  //if an operator is last character of previousDisplay, resolve with currentDisplay and add operator
+  } else if (previousDisplay[previousDisplay.length-1] === ("+" || "÷" || "-" || "×")) {
+    console.log(previousDisplay[previousDisplay.length-1]);
+    console.log(`sending to resolveExpression`);
+    resolveExpression(value);
+    previousDisplay[previousDisplay.length] = ` ${stringValue}`;
+  //if previousDisplay is a pure number
+  } else if (typeof parseFloat(previousDisplay) === "number") {
+    console.log(typeof parseFloat(previousDisplay));
+    console.log(`appended ${value}`);
+    displayElement2.innerHTML += ` ${stringValue}`;
+    displayElement.innerHTML = "0";
+  //if previousDisplay contains operator not as last character
+  } else {
+    console.log(`will resolve previousDisplay equation then add operator: ${stringValue}`); //delete later 
+  }
 }
   //any currentCalculation numeral is sent to previousCalculation
-    //if there is a previous numeral and an operator, it is calculated
+    //if last value is an operator, it is calculated
       //resulting value sent to currentCalculation
   //operator appends to previousCalculation, with space between
     //if there is no previous value, operator is appended to the default 0
     //if an operation is currently at end of previousCalculation, replace it with new operator
   //replace currentCalculation with 0, in case of appending decimals 
+
 
 
 //DECIMAL PRESSED
@@ -115,27 +158,113 @@ const appendNumeral = (value) => {
 
 
 //EQUALS PRESSED
-const resolveExpression = () => {
-  console.log("I should resolve the expression thus far!");
+const resolveExpression = (activationSource) => {
+  const cssEquals = document.querySelector(".screen__equals");
+  const displayElement = document.querySelector(".screen__currentCalculation");
+  const displayElement2 = document.querySelector(".screen__previousCalculation");
+  const currentDisplay = displayElement.innerHTML;
+  const previousDisplay = displayElement2.innerHTML;
+  let a = undefined;
+  let b = undefined;
+
+  //delete currentDisplay decimal point if last character
+  if (currentDisplay[currentDisplay.length-1] === "."){
+    displayElement.innerHTML = currentDisplay.slice(0, -1);
+  }
+  //if there is no operator in previousDisplay
+  if (!previousDisplay.includes("+") 
+    && !previousDisplay.includes("-") 
+    && !previousDisplay.includes("÷") 
+    && !previousDisplay.includes("×")) {
+    displayElement2.innerHTML = `${displayElement.innerHTML}`;
+  }
+
+  //additon 
+  const add = (a, b) => {
+    return a + b;
+  }
+  //subtraction
+  const subtract = (a, b) => {
+    return a - b;
+  }
+  //multiplication
+  const multiply = (a, b) => {
+    return a * b;
+  }
+  //divide
+  const divide = (a, b) => {
+    return a / b;
+  }
+
+  //if activated by button
+  if (activationSource === "button") {
+    //make = css visible
+    cssEquals.classList.add("screen__equals--visible");
+
+    //resolve previousDisplay, operator, current display
+    a = parseFloat(previousDisplay.slice(0, previousDisplay.indexOf(" ")));
+    b = parseFloat(currentDisplay);
+    operator = previousDisplay.slice(previousDisplay.indexOf(" ")+1, previousDisplay.indexOf(" ")+2);
+
+    //if there is no equation to solve, append currentDisplay to previousDisplay
+    if (!previousDisplay) {
+      displayElement2.innerHTML = `${currentDisplay}`;
+    }
+
+    //send arguments to corrosponding function, currentDisplay result
+    switch (operator) {
+      case "+":
+        displayElement.innerHTML = `${add(a, b)}`;
+        displayElement2.innerHTML += ` ${b}`;
+        break;
+      case "-":
+        displayElement.innerHTML = `${subtract(a, b)}`;
+        displayElement2.innerHTML += ` ${b}`;
+        break;
+      case "÷":
+        if (b === 0) { 
+          displayElement.innerHTML = `illegal`;
+        } else {
+          displayElement.innerHTML = `${divide(a, b)}`;
+          displayElement2.innerHTML += ` ${b}`; 
+        }
+         //fix 'illegal' to 'cannot divide by zero' statement once css text resizes
+        break;
+      case "×":
+        displayElement.innerHTML = `${multiply(a, b)}`;
+        displayElement2.innerHTML += ` ${b}`;
+        break;
+    }
+
+  // if activated by operator
+  } else {
+    // make = css invisible
+    cssEquals.classList.remove("screen__equals--visible");
+    console.log(`will resolve because ${activationSource} was pressed`);
+    //if previousDisplay===currentDisplay, add operator change currentDisplay to 0
+    if(displayElement2.innerHTML === displayElement.innerHTML) {
+      displayElement2.innerHTML += ` ${activationSource}`;
+      displayElement.innerHTML = `0`;
+    }
+    //break string into numbers and operators, send as arguments into corrosponding calculation function
+    //return value
+    //display
+  }
 }
-//equals resolves equation and displays result in currentCalculation
-  //if previousCalculation does not end in an operator, accumalate last operator with each additional click
-  //if previousCalculation ends in an decimal point, delete decimal
-  //if dividing by zero, message "cannot divide by zero"
+
 
 
 
 //BUTTON PRESSED
 //when numeral buttons pressed, value is appended to currentCalculation
 const buttonPressed = (input) => {
-  console.log(input);
   //call corrosponding function
   switch (input) {
     case "/": 
     case "*":
     case "-": 
     case "+":
-      operator(input);
+      appendOperator(input);
       break;
     case "C":
       clear(); //done
@@ -147,7 +276,7 @@ const buttonPressed = (input) => {
       appendDecimal();
       break;
     case "=":
-      resolveExpression();
+      resolveExpression("button");
       break;
     default:
       appendNumeral(input); //done
