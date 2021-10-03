@@ -29,12 +29,9 @@ const clear = () => {
 const deleteBackwards = () => {
   const displayElement = document.querySelector(".screen__currentCalculation");
   const currentDisplay = displayElement.innerHTML;
-  console.log("Delete backwards has been clicked!"); //delete later
-  console.log(displayElement.innerHTML.slice(0, -1));
 
   //if already at 0
-  if (currentDisplay.length === 1 
-    && currentDisplay === "0") {
+  if (currentDisplay === "0") {
     console.log("cannot delete anything else"); //delete later
     return;
   //if deleting final numeral
