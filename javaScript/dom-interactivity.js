@@ -79,27 +79,23 @@ const appendOperator = (value) => {
   //if an operator is last character of previousDisplay, resolve with currentDisplay and add operator
   } else if (previousDisplay[previousDisplay.length-1] === ("+" || "÷" || "-" || "×")) {
     console.log(previousDisplay[previousDisplay.length-1]);
-    console.log(`sending to resolveExpression`);
+    console.log(`sending to resolveExpression`);//delete later
     resolveExpression(value);
-    previousDisplay[previousDisplay.length] = ` ${stringValue}`;
-  //if previousDisplay is a pure number
-  } else if (typeof parseFloat(previousDisplay) === "number") {
-    console.log(typeof parseFloat(previousDisplay));
-    console.log(`appended ${value}`);
+    displayElement2.innerHTML = displayElement.innerHTML + ` ${stringValue}`;
+    displayElement.innerHTML = "0";
+  //if previousDisplay is a number only
+  } else if (!previousDisplay.match(/\+|\-|\*|\//)) {
+    console.log(`appended ${value}`);//delete later
     displayElement2.innerHTML += ` ${stringValue}`;
     displayElement.innerHTML = "0";
   //if previousDisplay contains operator not as last character
   } else {
     console.log(`will resolve previousDisplay equation then add operator: ${stringValue}`); //delete later 
+    resolveExpression(value);
+    displayElement2.innerHTML = displayElement.innerHTML + ` ${stringValue}`;
+    displayElement.innerHTML = "0";
   }
 }
-  //any currentCalculation numeral is sent to previousCalculation
-    //if last value is an operator, it is calculated
-      //resulting value sent to currentCalculation
-  //operator appends to previousCalculation, with space between
-    //if there is no previous value, operator is appended to the default 0
-    //if an operation is currently at end of previousCalculation, replace it with new operator
-  //replace currentCalculation with 0, in case of appending decimals 
 
 
 
@@ -164,8 +160,10 @@ const resolveExpression = (activationSource) => {
   const displayElement2 = document.querySelector(".screen__previousCalculation");
   const currentDisplay = displayElement.innerHTML;
   const previousDisplay = displayElement2.innerHTML;
-  let a = undefined;
-  let b = undefined;
+  //convert string into mathematical segments
+  let a = parseFloat(previousDisplay.slice(0, previousDisplay.indexOf(" ")));
+  let b = parseFloat(currentDisplay);
+  let operator = previousDisplay.slice(previousDisplay.indexOf(" ")+1, previousDisplay.indexOf(" ")+2);
 
   //delete currentDisplay decimal point if last character
   if (currentDisplay[currentDisplay.length-1] === "."){
@@ -200,58 +198,38 @@ const resolveExpression = (activationSource) => {
   if (activationSource === "button") {
     //make = css visible
     cssEquals.classList.add("screen__equals--visible");
+  }
 
-    //resolve previousDisplay, operator, current display
-    a = parseFloat(previousDisplay.slice(0, previousDisplay.indexOf(" ")));
-    b = parseFloat(currentDisplay);
-    operator = previousDisplay.slice(previousDisplay.indexOf(" ")+1, previousDisplay.indexOf(" ")+2);
+  //if there is no equation to solve, append currentDisplay to previousDisplay
+  if (!previousDisplay) {
+    displayElement2.innerHTML = `${currentDisplay}`;
+  }
 
-    //if there is no equation to solve, append currentDisplay to previousDisplay
-    if (!previousDisplay) {
-      displayElement2.innerHTML = `${currentDisplay}`;
-    }
-
-    //send arguments to corrosponding function, currentDisplay result
-    switch (operator) {
-      case "+":
-        displayElement.innerHTML = `${add(a, b)}`;
-        displayElement2.innerHTML += ` ${b}`;
-        break;
-      case "-":
-        displayElement.innerHTML = `${subtract(a, b)}`;
-        displayElement2.innerHTML += ` ${b}`;
-        break;
-      case "÷":
-        if (b === 0) { 
-          displayElement.innerHTML = `illegal`;
-        } else {
-          displayElement.innerHTML = `${divide(a, b)}`;
-          displayElement2.innerHTML += ` ${b}`; 
-        }
-         //fix 'illegal' to 'cannot divide by zero' statement once css text resizes
-        break;
-      case "×":
-        displayElement.innerHTML = `${multiply(a, b)}`;
-        displayElement2.innerHTML += ` ${b}`;
-        break;
-    }
-
-  // if activated by operator
-  } else {
-    // make = css invisible
-    cssEquals.classList.remove("screen__equals--visible");
-    console.log(`will resolve because ${activationSource} was pressed`);
-    //if previousDisplay===currentDisplay, add operator change currentDisplay to 0
-    if(displayElement2.innerHTML === displayElement.innerHTML) {
-      displayElement2.innerHTML += ` ${activationSource}`;
-      displayElement.innerHTML = `0`;
-    }
-    //break string into numbers and operators, send as arguments into corrosponding calculation function
-    //return value
-    //display
+  //send arguments to corrosponding function, currentDisplay result
+  switch (operator) {
+    case "+":
+      displayElement.innerHTML = `${add(a, b)}`;
+      displayElement2.innerHTML += ` ${b}`;
+      break;
+    case "-":
+      displayElement.innerHTML = `${subtract(a, b)}`;
+      displayElement2.innerHTML += ` ${b}`;
+      break;
+    case "÷":
+      if (b === 0) { 
+        displayElement.innerHTML = `illegal`;
+      } else {
+        displayElement.innerHTML = `${divide(a, b)}`;
+        displayElement2.innerHTML += ` ${b}`; 
+      }
+        //fix 'illegal' to 'cannot divide by zero' statement once css text resizes
+      break;
+    case "×":
+      displayElement.innerHTML = `${multiply(a, b)}`;
+      displayElement2.innerHTML += ` ${b}`;
+      break;
   }
 }
-
 
 
 
@@ -283,8 +261,9 @@ const buttonPressed = (input) => {
       break;
   }
 }
-  //if currentCalculation value is 0, replace with new value
   //for every numeral exceeding a group of 3, add a ',' to displayed text
+  //round anwers to an appropriate number of digits
+  //if inputs have a decimal, then no following value other than 0, equate to 0 
 
 
 
