@@ -1,6 +1,7 @@
 //GLOBAL VARIABLES
 const deleteButton = document.querySelector(".calculator__button--delete");
 const svg = document.querySelector(".svg");
+const cssEquals = document.querySelector(".screen__equals");
 
 //CSS BUTTON PRESSED BEHAVIOUR
 const active = () => {
@@ -15,7 +16,6 @@ const notActive = () => {
 //CLEAR PRESSED
 const clear = () => {
   console.log("Clear has been clicked!"); //delete later
-  const cssEquals = document.querySelector(".screen__equals");
   const displayElement = document.querySelector(".screen__currentCalculation");
   const displayElement2 = document.querySelector(".screen__previousCalculation");
   displayElement.innerHTML = "0";
@@ -53,7 +53,6 @@ const deleteBackwards = () => {
 const appendOperator = (value) => {
   const displayElement = document.querySelector(".screen__currentCalculation");
   const displayElement2 = document.querySelector(".screen__previousCalculation");
-  const currentDisplay = displayElement.innerHTML;
   const previousDisplay = displayElement2.innerHTML;
   let stringValue = "";
   console.log(`previous string last char: ${previousDisplay[previousDisplay.length-1]}`);
@@ -71,6 +70,9 @@ const appendOperator = (value) => {
       stringValue = "×";
   }
 
+  //remove equals sign
+  cssEquals.classList.remove("screen__equals--visible");
+
   //if previousDisplay is empty
   if (previousDisplay === "") {
     console.log(`changed display, added ${value}`);
@@ -84,15 +86,15 @@ const appendOperator = (value) => {
     displayElement2.innerHTML = displayElement.innerHTML + ` ${stringValue}`;
     displayElement.innerHTML = "0";
   //if previousDisplay is a number only
-  } else if (!previousDisplay.match(/\+|\-|\*|\//)) {
+  } else if (previousDisplay.match(/\+|\-|\÷|\×/)) {
     console.log(`appended ${value}`);//delete later
-    displayElement2.innerHTML += ` ${stringValue}`;
+    displayElement2.innerHTML = `${displayElement.innerHTML} ${stringValue}`;
     displayElement.innerHTML = "0";
   //if previousDisplay contains operator not as last character
   } else {
     console.log(`will resolve previousDisplay equation then add operator: ${stringValue}`); //delete later 
     resolveExpression(value);
-    displayElement2.innerHTML = displayElement.innerHTML + ` ${stringValue}`;
+    displayElement2.innerHTML = `${displayElement.innerHTML} ${stringValue}`;
     displayElement.innerHTML = "0";
   }
 }
@@ -127,7 +129,6 @@ const appendDecimal = () => {
 const appendNumeral = (value) => {
   const displayElement = document.querySelector(".screen__currentCalculation");
   const currentDisplay = displayElement.innerHTML;
-  let equation1 = parseFloat(currentDisplay);
 
   //check if max characters
   if (currentDisplay.length === 7) {
@@ -155,7 +156,6 @@ const appendNumeral = (value) => {
 
 //EQUALS PRESSED
 const resolveExpression = (activationSource) => {
-  const cssEquals = document.querySelector(".screen__equals");
   const displayElement = document.querySelector(".screen__currentCalculation");
   const displayElement2 = document.querySelector(".screen__previousCalculation");
   const currentDisplay = displayElement.innerHTML;
