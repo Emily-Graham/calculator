@@ -5,25 +5,46 @@ const cssEquals = document.querySelector(".screen__equals");
 
 //CSS BUTTON PRESSED BEHAVIOUR
 const active = () => {
-  svg.style.fill = "#FFF"
+  svg.style.fill = "#FFF";
 }
 const notActive = () => {
-  svg.style.fill = "#b0b2b4"
+  svg.style.fill = "#b0b2b4";
 }
 
+//DETERMING TEXT CURRENTDISPLAY FONT SIZE
+const textSize = () => {
+  const displayElement = document.querySelector(".screen__currentCalculation");
+  const currentDisplay = displayElement.innerHTML;
 
-
+  if (currentDisplay.length <= 7) {
+    return;
+  } else if (currentDisplay.length > 7 && currentDisplay.length <= 9) {
+    displayElement.style.fontSize = "3rem";
+    cssEquals.style.fontSize = "3rem";
+    console.log(`fontsize: 3rem`);
+  } else if (currentDisplay.length <= 11) {
+    displayElement.style.fontSize = "2rem";
+    cssEquals.style.fontSize = "2rem";
+    console.log(`fontsize: 2rem`);
+  } else if (currentDisplay.length <= 18) {
+    displayElement.style.fontSize = "1.5rem";
+    cssEquals.style.fontSize = "1.5rem";
+    console.log(`fontsize: 1.5rem`);
+  } else if (currentDisplay.length <= 26) {
+    displayElement.style.fontSize = "1rem";
+    cssEquals.style.fontSize = "1rem";
+    console.log(`fontsize: 1rem`);
+  }
+}
+ 
 //CLEAR PRESSED
 const clear = () => {
-  console.log("Clear has been clicked!"); //delete later
   const displayElement = document.querySelector(".screen__currentCalculation");
   const displayElement2 = document.querySelector(".screen__previousCalculation");
   displayElement.innerHTML = "0";
   displayElement2.innerHTML = ""; 
   cssEquals.classList.remove("screen__equals--visible");
 }
-
-
 
 //BACKWARDS PRESSED
 const deleteBackwards = () => {
@@ -32,19 +53,34 @@ const deleteBackwards = () => {
 
   //if already at 0
   if (currentDisplay === "0") {
-    console.log("cannot delete anything else"); //delete later
     return;
   //if deleting final numeral
   } else if (currentDisplay.length === 1){
     displayElement.innerHTML = "0"; 
-    console.log(`deleted ${displayElement.innerHTML[displayElement.innerHTML.length-1]}`); //delete later
   } else {
-    console.log(`deleting ${displayElement.innerHTML[displayElement.innerHTML.length-1]}`); //delete later
     displayElement.innerHTML = displayElement.innerHTML.slice(0, -1);
   }
 }
 
-
+//DELETE currentDisplay decimal point if valueless
+const removeValuelessDecimal = () => {
+  const displayElement = document.querySelector(".screen__currentCalculation");
+  const currentDisplay = displayElement.innerHTML;
+  
+  //if last character is a decimal
+  if (!currentDisplay.includes(".")) {
+    return;
+  } else if (currentDisplay[currentDisplay.length-1] === "."){
+    displayElement.innerHTML = currentDisplay.slice(0, -1);
+  //if there in no following numeral other than 0
+  } else if (/\.0+$/.test(currentDisplay)) {
+    console.log(`yes, there is only a decimal and zeros`);
+    displayElement.innerHTML = currentDisplay.replace(/\.0+$/, "")
+  //if valueless zeros, delete
+  } else if (currentDisplay.match(/0+$/)) {
+    displayElement.innerHTML = currentDisplay.replace(/0+$/, "");
+  }
+}
 
 //OPERATOR PRESSED
 const appendOperator = (value) => {
@@ -72,56 +108,41 @@ const appendOperator = (value) => {
 
   //if previousDisplay is empty
   if (previousDisplay === "") {
-    console.log(`changed display, added ${value}`);
     displayElement2.innerHTML = `${displayElement.innerHTML} ${stringValue}`;
     displayElement.innerHTML = "0";
   //if an operator is last character of previousDisplay, resolve with currentDisplay and add operator
-  } else if (previousDisplay[previousDisplay.length-1] === ("+" || "÷" || "-" || "×")) {
-    console.log(previousDisplay[previousDisplay.length-1]);
-    console.log(`sending to resolveExpression`);//delete later
+  } else if (previousDisplay[previousDisplay.length-1].match(/\+|\-|\÷|\×/)) {
     resolveExpression(value);
     displayElement2.innerHTML = displayElement.innerHTML + ` ${stringValue}`;
     displayElement.innerHTML = "0";
   //if previousDisplay is a number only
   } else if (previousDisplay.match(/\+|\-|\÷|\×/)) {
-    console.log(`appended ${value}`);//delete later
     displayElement2.innerHTML = `${displayElement.innerHTML} ${stringValue}`;
     displayElement.innerHTML = "0";
   //if previousDisplay contains operator not as last character
   } else {
-    console.log(`will resolve previousDisplay equation then add operator: ${stringValue}`); //delete later 
     resolveExpression(value);
     displayElement2.innerHTML = `${displayElement.innerHTML} ${stringValue}`;
     displayElement.innerHTML = "0";
   }
 }
-
-
 
 //DECIMAL PRESSED
 const appendDecimal = () => {
   const displayElement = document.querySelector(".screen__currentCalculation");
   const currentDisplay = displayElement.innerHTML;
 
-  //previous character is decimal, don't add
-  if (currentDisplay[currentDisplay.length-1] === ".") {
-    console.log("decimal already exists"); //delete later
+  //previous character is decimal, max characters, already a decimal, don't add
+  if (currentDisplay[currentDisplay.length-1] === "."
+    || currentDisplay.length === 7
+    || currentDisplay.match(/\./)) {
     return;
-    //don't add past 7 characters
-  } else if (currentDisplay.length === 7) {
-    console.log("max character reached"); //delete later
-    return;
-    //append decimal
+  //append decimal
   } else {
     displayElement.innerHTML += ".";
-    console.log(`appended .`); //delete later
   }
 }
   
-
-
-
-
 //NUMERICAL BUTTON PRESSED
 const appendNumeral = (value) => {
   const displayElement = document.querySelector(".screen__currentCalculation");
@@ -129,27 +150,21 @@ const appendNumeral = (value) => {
 
   //check if max characters
   if (currentDisplay.length === 7) {
-    console.log("no number added"); //delete later
     return;
-    //don't add 0 to 0
+  // don't add 0 to 0
   } else if (currentDisplay.length === 1 
             && currentDisplay === "0" 
             && value === "0") {
-    console.log("Already 0"); //delete later
-    //replace if only 0
+    return;
+  //replace if only 0
   } else if (currentDisplay.length === 1 
             && currentDisplay === "0") {
-    console.log(`0 => ${value}`); //delete later
     displayElement.innerHTML = value;
-    //append new number
+  //append new number
   } else {
     displayElement.innerHTML += value;
-    console.log(`appended ${value}`); //delete later
   }
-  //resizing text display based on number length - NOT CURRENTLY IMPLEMENTED
 }
-
-
 
 //EQUALS PRESSED
 const resolveExpression = (activationSource) => {
@@ -162,10 +177,6 @@ const resolveExpression = (activationSource) => {
   let b = parseFloat(currentDisplay);
   let operator = previousDisplay.slice(previousDisplay.indexOf(" ")+1, previousDisplay.indexOf(" ")+2);
 
-  //delete currentDisplay decimal point if last character
-  if (currentDisplay[currentDisplay.length-1] === "."){
-    displayElement.innerHTML = currentDisplay.slice(0, -1);
-  }
   //if there is no operator in previousDisplay
   if (!previousDisplay.includes("+") 
     && !previousDisplay.includes("-") 
@@ -228,10 +239,7 @@ const resolveExpression = (activationSource) => {
   }
 }
 
-
-
 //BUTTON PRESSED
-//when numeral buttons pressed, value is appended to currentCalculation
 const buttonPressed = (input) => {
   //call corrosponding function
   switch (input) {
@@ -239,6 +247,7 @@ const buttonPressed = (input) => {
     case "*":
     case "-": 
     case "+":
+      removeValuelessDecimal();
       appendOperator(input);
       break;
     case "C":
@@ -251,26 +260,26 @@ const buttonPressed = (input) => {
       appendDecimal();
       break;
     case "=":
+      removeValuelessDecimal();
       resolveExpression("button");
       break;
     default:
       appendNumeral(input); //done
       break;
   }
+  textSize();
 }
   //for every numeral exceeding a group of 3, add a ',' to displayed text
   //round anwers to an appropriate number of digits
-  //if inputs have a decimal, then no following value other than 0, equate to 0 
-
-
+  //answers can be a max of 26 characters
 
 //EVENT LISTENERS
   //css styling event listeners
 deleteButton.addEventListener("mousedown", active);
 deleteButton.addEventListener("mouseup", notActive);
   //calls buttonPressed function
-document.querySelectorAll(".calculator__button").forEach((button) => button.addEventListener("click", (event) => 
-{ if (event.target === svg || event.target.id === "svg") {
+document.querySelectorAll(".calculator__button").forEach((button) => button.addEventListener("click", (event) => { if (event.target === svg || event.target.id === "svg") {
   buttonPressed("D")
 } else {
-  buttonPressed(event.target.id)}}));
+  buttonPressed(event.target.id)
+}}));
