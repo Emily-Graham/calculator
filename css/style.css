@@ -38,7 +38,7 @@ main {
   grid-template-rows: repeat(5, 1fr);
   grid-template-columns: repeat(4, 1fr);
   gap: 2px;
-  grid: "clear back divide multiply" "seven eight nine minus" "four five six plus" "one two three equals" "zero zero decimal equals";
+  grid: "clear delete divide multiply" "seven eight nine minus" "four five six plus" "one two three equals" "zero zero decimal equals";
   background-color: #e6e7e9;
 }
 .calculator__button {
@@ -51,7 +51,6 @@ main {
   font-size: 1.5rem;
 }
 .calculator__button:active {
-  color: #FFF;
   background-color: #e6e7e9;
 }
 .calculator__button--0 {
@@ -110,8 +109,8 @@ main {
 .calculator__button--clear {
   grid-area: clear;
 }
-.calculator__button--back {
-  grid-area: back;
+.calculator__button--delete {
+  grid-area: delete;
   position: relative;
 }
 
@@ -119,37 +118,49 @@ main {
   display: flex;
   justify-content: space-between;
   height: 10%;
-  background-color: beige;
+}
+.screen__time {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 0.5rem;
 }
 .screen__calculations {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  padding: 0px 10px 0px 10px;
+  height: 90%;
   width: 100%;
 }
-.screen__previousCalculation, .screen__currentCalculation {
+.screen__previousCalculation, .screen__equals, .screen__currentCalculation {
   box-sizing: border-box;
+  height: 20px;
+  width: 100%;
   color: #FFF;
   font-family: "Inter", sans-serif;
   font-weight: 200;
   text-align: right;
   vertical-align: middle;
-  padding: 0px 10px 0px 10px;
 }
 .screen__currentCalculation {
-  height: 70px;
-  width: 100%;
+  height: auto;
+  width: 88%;
   font-size: 3.5rem;
-  text-align: justify;
 }
-.screen__currentCalculation:after {
-  content: "";
-  display: inline-block;
-  width: 100%;
+.screen__equals {
+  display: none;
+  height: auto;
+  width: 12%;
+  font-size: 3.5rem;
+  text-align: left;
 }
-.screen__currentCalculation--singleText {
-  text-align: right;
+.screen__equals--visible {
+  display: inline;
 }
 
 #svg {
