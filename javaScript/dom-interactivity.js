@@ -16,7 +16,6 @@ const notActive = () => {
 const textSize = () => {
   const displayElement = document.querySelector(".screen__currentCalculation");
   const currentDisplay = displayElement.innerHTML;
-  console.log(`I'm checking text size`);
 
   if (currentDisplay.length <= 7) {
     displayElement.style.fontSize = "3.5rem";
@@ -24,19 +23,15 @@ const textSize = () => {
   } else if (currentDisplay.length > 7 && currentDisplay.length <= 9) {
     displayElement.style.fontSize = "3rem";
     cssEquals.style.fontSize = "3rem";
-    console.log(`fontsize: 3rem`);
   } else if (currentDisplay.length <= 11) {
     displayElement.style.fontSize = "2rem";
     cssEquals.style.fontSize = "2rem";
-    console.log(`fontsize: 2rem`);
   } else if (currentDisplay.length <= 18) {
     displayElement.style.fontSize = "1.5rem";
     cssEquals.style.fontSize = "1.5rem";
-    console.log(`fontsize: 1.5rem`);
   } else if (currentDisplay.length <= 26) {
     displayElement.style.fontSize = "1rem";
     cssEquals.style.fontSize = "1rem";
-    console.log(`fontsize: 1rem`);
   }
 }
  
@@ -77,7 +72,6 @@ const removeValuelessDecimal = () => {
     displayElement.innerHTML = currentDisplay.slice(0, -1);
   //if there in no following numeral other than 0
   } else if (/\.0+$/.test(currentDisplay)) {
-    console.log(`yes, there is only a decimal and zeros`);
     displayElement.innerHTML = currentDisplay.replace(/\.0+$/, "")
   //if valueless zeros, delete
   } else if (currentDisplay.match(/0+$/)) {
@@ -91,7 +85,6 @@ const appendOperator = (value) => {
   const displayElement2 = document.querySelector(".screen__previousCalculation");
   const previousDisplay = displayElement2.innerHTML;
   let stringValue = "";
-  console.log(`previous string last char: ${previousDisplay[previousDisplay.length-1]}`);
 
   //convert operator to string equivalent 
   switch (value){
@@ -255,10 +248,10 @@ const buttonPressed = (input) => {
       appendOperator(input);
       break;
     case "C":
-      clear(); //done
+      clear(); 
       break;
     case "D":
-      deleteBackwards(); //done
+      deleteBackwards(); 
       break;
     case ".":
       appendDecimal();
@@ -268,7 +261,7 @@ const buttonPressed = (input) => {
       resolveExpression("button");
       break;
     default:
-      appendNumeral(input); //done
+      appendNumeral(input); 
       break;
   }
   textSize();
