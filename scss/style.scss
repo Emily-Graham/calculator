@@ -43,7 +43,7 @@ main {
     grid-template-columns: repeat(4, 1fr);
     gap: 2px;
     grid: 
-    'clear back divide multiply'
+    'clear delete divide multiply'
     'seven eight nine minus'
     'four five six plus'
     'one two three equals'
@@ -61,7 +61,6 @@ main {
     font-size: 1.5rem;
 
     &:active {
-      color: p.$white;
       background-color: p.$keypad;
     }
 
@@ -121,8 +120,8 @@ main {
     &--clear {
       grid-area: clear;
     }
-    &--back {
-      grid-area: back;
+    &--delete {
+      grid-area: delete;
       position: relative;
     }
   }
@@ -138,35 +137,38 @@ main {
 
   &__calculations {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    @include m.height-width(100%, 100%);
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 0px 10px 0px 10px;
+    @include m.height-width(90%, 100%);
   }
 
   &__previousCalculation {
     box-sizing: border-box;
+    @include m.height-width(20px, 100%);
     color: p.$white;
     font-family: 'Inter', sans-serif;
     font-weight: 200;
     text-align: right;
     vertical-align: middle;
-    padding: 0px 10px 0px 10px;
   }
 
   &__currentCalculation {
     @extend .screen__previousCalculation;
-    @include m.height-width(70px, 100%);
+    @include m.height-width(auto, 88%);
     font-size: 3.5rem;
-    text-align: justify;
-    
-    &:after {
-      content: "";
-      display: inline-block;
-      width: 100%;
-    }
+  }
 
-    &--singleText {
-      text-align: right;
+  &__equals {
+    display: none;
+    @extend .screen__previousCalculation;
+    @include m.height-width(auto, 12%);
+    font-size: 3.5rem;
+    text-align: left;
+    &--visible {
+      display: inline;
     }
   }
 }
