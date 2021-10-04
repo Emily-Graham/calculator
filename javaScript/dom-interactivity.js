@@ -272,6 +272,9 @@ const buttonPressed = (input) => {
   //for every numeral exceeding a group of 3, add a ',' to displayed text
   //round anwers to an appropriate number of digits
   //answers can be a max of 26 characters
+  //if number is 9,999,999,999,999,999,999, do not allow any buttons other than clear/delete to be pressed
+  //add media queries for phones 
+    //check fontresizing for small screens
 
 //EVENT LISTENERS
   //css styling event listeners
