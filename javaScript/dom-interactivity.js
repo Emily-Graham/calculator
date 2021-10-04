@@ -12,13 +12,6 @@ const notActive = () => {
   svg.style.fill = "#b0b2b4";
 }
 
-//DISPLAY TIME
-const displayTime = () => {
-  const date = formatAMPM(new Date());
-
-  const hours = date
-}
-
 //DETERMING TEXT CURRENTDISPLAY FONT SIZE
 const textSize = () => {
   const displayElement = document.querySelector(".screen__currentCalculation");
