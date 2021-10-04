@@ -1,4 +1,5 @@
 //GLOBAL VARIABLES
+const time = document.querySelector(".screen__time");
 const deleteButton = document.querySelector(".calculator__button--delete");
 const svg = document.querySelector(".svg");
 const cssEquals = document.querySelector(".screen__equals");
@@ -11,13 +12,22 @@ const notActive = () => {
   svg.style.fill = "#b0b2b4";
 }
 
+//DISPLAY TIME
+const displayTime = () => {
+  const date = formatAMPM(new Date());
+
+  const hours = date
+}
+
 //DETERMING TEXT CURRENTDISPLAY FONT SIZE
 const textSize = () => {
   const displayElement = document.querySelector(".screen__currentCalculation");
   const currentDisplay = displayElement.innerHTML;
+  console.log(`I'm checking text size`);
 
   if (currentDisplay.length <= 7) {
-    return;
+    displayElement.style.fontSize = "3.5rem";
+    cssEquals.style.fontSize = "3.5rem";
   } else if (currentDisplay.length > 7 && currentDisplay.length <= 9) {
     displayElement.style.fontSize = "3rem";
     cssEquals.style.fontSize = "3rem";
@@ -216,27 +226,28 @@ const resolveExpression = (activationSource) => {
   //send arguments to corrosponding function, currentDisplay result
   switch (operator) {
     case "+":
-      displayElement.innerHTML = `${add(a, b)}`;
+      displayElement.innerHTML = `${add(a, b).toPrecision(12)}`;
       displayElement2.innerHTML += ` ${b}`;
       break;
     case "-":
-      displayElement.innerHTML = `${subtract(a, b)}`;
+      displayElement.innerHTML = `${subtract(a, b).toPrecision(12)}`;
       displayElement2.innerHTML += ` ${b}`;
       break;
     case "÷":
       if (b === 0) { 
-        displayElement.innerHTML = `illegal`;
+        displayElement.innerHTML = `cannot divide by zero`;
       } else {
-        displayElement.innerHTML = `${divide(a, b)}`;
+        displayElement.innerHTML = `${divide(a, b).toPrecision(12)}`;
         displayElement2.innerHTML += ` ${b}`; 
       }
         //fix 'illegal' to 'cannot divide by zero' statement once css text resizes
       break;
     case "×":
-      displayElement.innerHTML = `${multiply(a, b)}`;
+      displayElement.innerHTML = `${multiply(a, b).toPrecision(12)}`;
       displayElement2.innerHTML += ` ${b}`;
       break;
   }
+  removeValuelessDecimal();
 }
 
 //BUTTON PRESSED
