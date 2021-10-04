@@ -118,7 +118,14 @@ main {
   display: flex;
   justify-content: space-between;
   height: 10%;
-  background-color: beige;
+}
+.screen__time {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 0.5rem;
 }
 .screen__calculations {
   display: flex;
