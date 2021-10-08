@@ -4,28 +4,36 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./../css/style.css">
+
+  <!-- styling -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300&display=swap" rel="stylesheet">
-  <script src="./../javaScript/calculations.js" defer></script>
-  <script src="./../javaScript/dom-interactivity.js" defer></script>
+  <link rel="stylesheet" href="./../css/style.css">
+
+  <!-- scripts -->
+  <script type="module" src="./../javaScript/dom-interactivity.js" defer></script>
   <title>Calculator</title>
 </head>
+
 <body>
   <main>
+
+    <!-- calculator body -->
     <div class="calculator__container">
       <div class="calculator__screen"> 
-        <!-- only for large screens -->
         <div class="screen__statusBar">
           <div class="screen__wifi"></div>
           <div class="screen__time"></div>
           <div class="screen__battery"></div>
         </div>
+        <!-- calculation displays -->
         <div class="screen__calculations">
           <p class="screen__previousCalculation"></p>
           <p class="screen__equals">=</p>
           <p class="screen__currentCalculation">0</p>
         </div>
       </div>
+
+      <!-- buttons and interactivity -->
       <div class="calculator__button-container">
         <div id="0" class="calculator__button calculator__button--0">0</div>
         <div id="1" class="calculator__button calculator__button--1">1</div>
@@ -51,21 +59,5 @@
       </div>
     </div>
   </main>
-  <footer>
-  </footer>
 </body>
 </html>
-
-<!-- Calculator:
-To be submitted by Tuesday 5th of October
--   HTML/SCSS
-1. Create a calculator to be rendered to the html page
-1. it should have number keys from 0 to 9
-1. It should have operator keys (+, -, /, \*)
-It should handle decimals
-1. It should have a display rendering the current calculation in a box at the top
-1. You should choose a picture of a calculator from the Internet and reproduce it in HTML/SCSS
--   JavaScript
-1. Should render the current calculation in a box at the top (calculator display)
-1. It doesn’t need to support orders of operation
-1. It should not use eval() or Function() constructor (edited)  -->
