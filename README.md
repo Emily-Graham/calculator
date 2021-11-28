@@ -1,4 +1,7 @@
 # calculator
+Aim: 
+
+- To create a calculator that matches the chosen UI design
 
 Additional Tasks to finish;
 
